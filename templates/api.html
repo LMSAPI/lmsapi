@@ -3,7 +3,68 @@
 
 <div class="container">
     <div class="row">
-        <h4>API KEY: {{ apikey }}</h4>
+        <h4>Your API Key: {{ apikey }}</h4>
+    </div>
+    <div class="row">
+        <p>The following examples will help you understand how the API will be used. As of now, the API calls should be directed to https://lmsapi-student.herokuapp.com/. This will change in the future.</p>
+    </div>
+    <div class="row">
+        <code>curl -X GET https://lmsapi-student.herokuapp.com/?key=&lt;apikey&gt;</code>
+    </div>
+    <div class="row">
+        <code>curl -X GET https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;</code>
+    </div>
+    <div class="row">
+        <code>curl -X POST https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;&firstname=&lt;firstname&gt;&lastname=&lt;lastname&gt;&email=&lt;email&gt;</code>
+    </div>
+    <br><br>
+    <div class="row top-buffer-small">
+        <code>/</code>
+        <p>displays confirmation that the user successfully communicated with the root directory</p>
+    </div>
+    <br>
+    <div class="row top-buffer-small">
+        <code>/students</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Retrieves all of the students under that user</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a student</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="row top-buffer-small">
+        <code>/students/&lt;student_email&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a student</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a student</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

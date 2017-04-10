@@ -97,7 +97,10 @@ def database(project):
     if existing_project is None:
         return 'That project does not exist!'
 
-    return render_template('project.html', p_name=project, u_name=session['username'])
+    students = mongo.db.students
+    existing_students = students.find({'teacheruser': session['username']})
+    print(existing_students)
+    return render_template('project.html', p_name=project, u_name=session['username'], students=existing_students)
 
 
 def generate_key(length):
