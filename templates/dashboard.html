@@ -1,11 +1,37 @@
-{% extends "layout.html" %}
-{% block body %}
+{% extends "dashboard_layout.html" %}
+{% block content %}
+
 <div class="container">
+    {% if projects[0] is defined %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Project Name</th>
+                    <th>Database</th>
+                    <th>API</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for project in projects %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ project.name }}</td>
+                    <td><a href="{{ url_for('database', project=project.name) }}">Edit Database</a></td>
+                    <td><a href="{{ url_for('api', project=project.name) }}">Edit API</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="row">
+            You have no projects yet.
+        </div>
+    {% endif %}
+
     <div class="row">
-        You are logged in as {{u_name}}
-    </div>
-    <div class="row">
-        <a href="{{ url_for('logout') }}">Log out</a>.
+        <a href="{{ url_for('new_project') }}">Start New Project</a>
     </div>
 </div>
+
 {% endblock %}

@@ -1,0 +1,88 @@
+{% extends "dashboard_layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h1>{{ p_name }}</h1>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Students Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ student.firstname }}</td>
+                    <td>{{ student.lastname }}</td>
+                    <td>{{ student.email }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Courses Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Pre-req</th>
+                    <th>Enrolled Student</th>
+                    <th>Current</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.prereq }}</td>
+                    <td>{{ course.student }}</td>
+                    <td>{{ course.current }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Assignments Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Due Date</th>
+                    <th>Student</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for assignment in assignments %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ assignment.name }}</td>
+                    <td>{{ assignment.type }}</td>
+                    <td>{{ assignment.due }}</td>
+                    <td>{{ assignment.student }}</td>
+                    <td>{{ assignment.grade }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

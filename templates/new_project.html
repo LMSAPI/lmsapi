@@ -1,0 +1,17 @@
+{% extends "dashboard_layout.html" %}
+{% block content %}
+<div class="container top-buffer">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form method=POST action="{{ url_for('new_project') }}">
+                <div class="form-group">
+                    <label for="">Project Name</label>
+                    <input type="text" class="form-control" name="p_name" placeholder="Project Name">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create New Project</button>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}

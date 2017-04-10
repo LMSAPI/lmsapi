@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request, session, redirect
 from flask_pymongo import PyMongo
+from binascii import hexlify
 import bcrypt
+import os
 
 app = Flask(__name__)
 
@@ -14,8 +16,10 @@ mongo = PyMongo(app)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('dashboard.html', u_name=session['username'])
-        # 'You are logged in as ' + session['username']
+        projects = mongo.db.projects
+        u_projects = projects.find({'username': session['username']})
+
+        return render_template('dashboard.html', u_name=session['username'], projects=u_projects)
 
     return render_template('index.html')
 
@@ -47,13 +51,57 @@ def register():
 
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'name': request.form['username'], 'password': hashpass})
+            users.insert({'name': request.form['username'], 'password': hashpass, 'apikey': generate_key(40)})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
 
         return 'That username already exists!'
 
     return render_template('register.html')
+
+
+@app.route('/newproject', methods=['POST', 'GET'])
+def new_project():
+    if request.method == 'POST':
+        projects = mongo.db.projects
+        existing_project = projects.find_one({'name': request.form['p_name'], 'username': session['username']})
+
+        if existing_project is None:
+            projects.insert({'name': request.form['p_name'], 'username': session['username']})
+            return redirect(url_for('index'))
+
+        return 'You already have a project with that name!'
+
+    return render_template('new_project.html')
+
+
+@app.route('/api/<project>', methods=['GET'])
+def api(project):
+    projects = mongo.db.projects
+    existing_project = projects.find_one({'name': project, 'username': session['username']})
+
+    if existing_project is None:
+        return 'That project does not exist!'
+
+    users = mongo.db.users
+    existing_user = users.find_one({'name': session['username']})
+
+    return render_template('api.html', p_name=project, u_name=session['username'], apikey=existing_user['apikey'])
+
+
+@app.route('/database/<project>')
+def database(project):
+    projects = mongo.db.projects
+    existing_project = projects.find_one({'name': project, 'username': session['username']})
+
+    if existing_project is None:
+        return 'That project does not exist!'
+
+    return render_template('project.html', p_name=project, u_name=session['username'])
+
+
+def generate_key(length):
+    return hexlify(os.urandom(length))
 
 
 if __name__ == '__main__':
