@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'heroku_k0kdm9jl'
 app.config['MONGO_URI'] = 'mongodb://test_user:test_pass@ds157380.mlab.com:57380/heroku_k0kdm9jl'
+app.secret_key = 'mysecret'
 
 mongo = PyMongo(app)
 
@@ -56,5 +57,4 @@ def register():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'mysecret'
     app.run(debug=True)
