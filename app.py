@@ -75,18 +75,12 @@ def new_project():
     return render_template('new_project.html')
 
 
-@app.route('/api/<project>', methods=['GET'])
-def api(project):
-    projects = mongo.db.projects
-    existing_project = projects.find_one({'name': project, 'username': session['username']})
-
-    if existing_project is None:
-        return 'That project does not exist!'
-
+@app.route('/api', methods=['GET'])
+def api():
     users = mongo.db.users
     existing_user = users.find_one({'name': session['username']})
 
-    return render_template('api.html', p_name=project, u_name=session['username'], apikey=existing_user['apikey'])
+    return render_template('api.html', u_name=session['username'], apikey=existing_user['apikey'])
 
 
 @app.route('/database/<project>')
@@ -99,8 +93,33 @@ def database(project):
 
     students = mongo.db.students
     existing_students = students.find({'teacheruser': session['username']})
-    print(existing_students)
-    return render_template('project.html', p_name=project, u_name=session['username'], students=existing_students)
+
+    courses = mongo.db.courses
+    existing_courses = courses.find({'teacheruser': session['username']})
+
+    student_courses = mongo.db.student_courses
+    existing_student_courses = student_courses.find({'teacheruser': session['username']})
+
+    lessons = mongo.db.lessons
+    existing_lessons = lessons.find({'teacheruser': session['username']})
+
+    assignments = mongo.db.assignments
+    existing_assignments = assignments.find({'teacheruser': session['username']})
+
+    student_assignments = mongo.db.student_assignments
+    existing_student_assignments = student_assignments.find({'teacheruser': session['username']})
+
+    questions = mongo.db.questions
+    existing_questions = questions.find({'teacheruser': session['username']})
+
+    return render_template('project.html', p_name=project, u_name=session['username'],
+                           students=existing_students,
+                           courses=existing_courses,
+                           student_courses=existing_student_courses,
+                           lessons=existing_lessons,
+                           assignments=existing_assignments,
+                           student_assignments=existing_student_assignments,
+                           questions=existing_questions)
 
 
 def generate_key(length):

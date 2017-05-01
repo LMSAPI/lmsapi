@@ -36,20 +36,68 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Course Number</th>
                     <th>Name</th>
                     <th>Pre-req</th>
-                    <th>Enrolled Student</th>
-                    <th>Current</th>
                 </tr>
             </thead>
             <tbody>
             {% for course in courses %}
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
-                    <td>{{ course.name }}</td>
+                    <td>{{ course.number }}</td>
+                    <td>{{ course.title }}</td>
                     <td>{{ course.prereq }}</td>
-                    <td>{{ course.student }}</td>
-                    <td>{{ course.current }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Student Courses Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Course Number</th>
+                    <th>Name</th>
+                    <th>Enrolled</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student_course in student_courses %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ student_course.number }}</td>
+                    <td>{{ student_course.email }}</td>
+                    <td>{{ student_course.enrolled }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Lessons Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Number</th>
+                    <th>Course</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ lesson.number }}</td>
+                    <td>{{ lesson.course_num }}</td>
+                    <td>{{ lesson.title }}</td>
+                    <td>{{ lesson.content }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -62,22 +110,78 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Number</th>
                     <th>Name</th>
+                    <th>Course</th>
                     <th>Type</th>
                     <th>Due Date</th>
-                    <th>Student</th>
-                    <th>Grade</th>
                 </tr>
             </thead>
             <tbody>
             {% for assignment in assignments %}
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
+                    <td>{{ assignment.number }}</td>
                     <td>{{ assignment.name }}</td>
+                    <td>{{ assignment.course_num }}</td>
                     <td>{{ assignment.type }}</td>
                     <td>{{ assignment.due }}</td>
-                    <td>{{ assignment.student }}</td>
-                    <td>{{ assignment.grade }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Student Assignments Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Assignment</th>
+                    <th>Course</th>
+                    <th>Student</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student_assignment in student_assignments %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ student_assignment.number }}</td>
+                    <td>{{ student_assignment.course_num }}</td>
+                    <td>{{ student_assignment.email }}</td>
+                    <td>{{ student_assignment.grade }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row top-buffer-small">
+        <h3>Questions Table</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Number</th>
+                    <th>Course</th>
+                    <th>Assignment</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ question.number }}</td>
+                    <td>{{ question.course_num }}</td>
+                    <td>{{ question.assignment_num }}</td>
+                    <td>{{ question.question }}</td>
+                    <td>{{ question.answer }}</td>
+                    <td>{{ question.options }}</td>
                 </tr>
             {% endfor %}
             </tbody>

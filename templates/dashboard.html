@@ -9,7 +9,6 @@
                     <th>#</th>
                     <th>Project Name</th>
                     <th>Database</th>
-                    <th>API</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,8 +16,7 @@
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
                     <td>{{ project.name }}</td>
-                    <td><a href="{{ url_for('database', project=project.name) }}">Edit Database</a></td>
-                    <td><a href="{{ url_for('api', project=project.name) }}">Edit API</a></td>
+                    <td><a href="{{ url_for('database', project=project.name) }}">View Database</a></td>
                 </tr>
             {% endfor %}
             </tbody>

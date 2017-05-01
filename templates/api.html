@@ -3,26 +3,38 @@
 
 <div class="container">
     <div class="row">
-        <h4>Your API Key: {{ apikey }}</h4>
+        <h2>Your API Key: {{ apikey }}</h2>
     </div>
     <div class="row">
-        <p>The following examples will help you understand how the API will be used. As of now, the API calls should be directed to https://lmsapi-student.herokuapp.com/. This will change in the future.</p>
+        <p>The following examples will help you understand how the API will be used. As of now, the API calls should be directed to their respective Heroku URLs. The domains would be redirected to a single URL if used as a legitimate product. Below is a series of examples on how to make the calls.</p>
     </div>
     <div class="row">
-        <code>curl -X GET https://lmsapi-student.herokuapp.com/?key=&lt;apikey&gt;</code>
+        <code>curl -X GET 'https://lmsapi-student.herokuapp.com/?key=&lt;apikey&gt;'</code>
     </div>
     <div class="row">
-        <code>curl -X GET https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;</code>
+        <code>curl -X GET 'https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;'</code>
     </div>
     <div class="row">
-        <code>curl -X POST https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;&firstname=&lt;firstname&gt;&lastname=&lt;lastname&gt;&email=&lt;email&gt;</code>
+        <code>curl -X POST 'https://lmsapi-student.herokuapp.com/students?key=&lt;apikey&gt;&firstname=&lt;firstname&gt;&lastname=&lt;lastname&gt;&email=&lt;email&gt;'</code>
     </div>
-    <br><br>
+    <div class="row">
+        <code>curl -X PUT 'https://lmsapi-student.herokuapp.com/students/&lt;email&gt;?key=&lt;apikey&gt;&firstname=&lt;firstname&gt;&lastname=&lt;lastname&gt;&email=&lt;email&gt;'</code>
+    </div>
+    <div class="row">
+        <code>curl -X DELETE 'https://lmsapi-student.herokuapp.com/students/&lt;email&gt;?key=&lt;apikey&gt;'</code>
+    </div>
+    <br><hr>
     <div class="row top-buffer-small">
         <code>/</code>
         <p>displays confirmation that the user successfully communicated with the root directory</p>
     </div>
-    <br>
+    <hr>
+    <div class="row">
+        <h4><b>Students Service</b></h4>
+    </div>
+    <div class="row">
+        <p>URL: https://lmsapi-student.herokuapp.com/</p>
+    </div>
     <div class="row top-buffer-small">
         <code>/students</code>
         <table class="table" style="width:600px">
@@ -30,38 +42,335 @@
             <tr>
                 <th>Method</th>
                 <th>Action</th>
+                <th>Arguments</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th>GET</th>
                 <td>Retrieves all of the students under that user</td>
+                <td>None</td>
             </tr>
             <tr>
                 <th>POST</th>
                 <td>Adds a student</td>
+                <td>firstname, lastname, email</td>
             </tr>
             </tbody>
         </table>
     </div>
-    <br>
-    <div class="row top-buffer-small">
+    <div class="row">
         <code>/students/&lt;student_email&gt;</code>
         <table class="table" style="width:600px">
             <thead>
             <tr>
                 <th>Method</th>
                 <th>Action</th>
+                <th>Arguments</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th>PUT</th>
                 <td>Updates a student</td>
+                <td>firstname, lastname</td>
             </tr>
             <tr>
                 <th>DELETE</th>
                 <td>Removes a student</td>
+                <td>None</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="row">
+        <h4><b>Courses Service</b></h4>
+    </div>
+    <div class="row">
+        <p>URL: https://lmsapi-course.herokuapp.com/</p>
+    </div>
+    <div class="row top-buffer-small">
+        <code>/courses</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Retrieves all of the courses under that user</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a course</td>
+                <td>number, title, prereq</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/courses/&lt;course_number&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a course</td>
+                <td>title, prereq</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a course</td>
+                <td>None</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/courses/&lt;course_number&gt;/student</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Gets all students in a course</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a student to a course</td>
+                <td>email, enrolled</td>
+            </tr>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a students enrollment</td>
+                <td>email, enrolled</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a student from a course</td>
+                <td>email</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="row">
+        <h4><b>Assignments Service</b></h4>
+    </div>
+    <div class="row">
+        <p>URL: https://lmsapi-assignment.herokuapp.com/</p>
+    </div>
+    <div class="row top-buffer-small">
+        <code>/assignments</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>POST</th>
+                <td>Adds an assignment to a course</td>
+                <td>number, course_num, name, type, due</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/assigments/&lt;course_number&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Gets all assignments in a course</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th>PUT</th>
+                <td>Updates an assignment in a course</td>
+                <td>number, name, type, due</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes an assignment from a course</td>
+                <td>number</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/assignments/&lt;course_number&gt;/&lt;assignment_number&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Gets all students with an assignment</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a student to an assignment</td>
+                <td>email</td>
+            </tr>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a students status in an assignment</td>
+                <td>email, grade</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a student from an assignment</td>
+                <td>email</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="row">
+        <h4><b>Lessons Service</b></h4>
+    </div>
+    <div class="row">
+        <p>URL: https://lmsapi-lesson.herokuapp.com/</p>
+    </div>
+    <div class="row top-buffer-small">
+        <code>/lessons</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Gets all lessons in a course</td>
+                <td>course_num</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a lesson to a course</td>
+                <td>number, course_num, title, content</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/lessons/&lt;course_number&gt;/&lt;lesson_number&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a lesson in a course</td>
+                <td>title, content</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a lesson from a course</td>
+                <td>None</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="row">
+        <h4><b>Questions Service</b></h4>
+    </div>
+    <div class="row">
+        <p>URL: https://lmsapi-question.herokuapp.com/</p>
+    </div>
+    <div class="row top-buffer-small">
+        <code>/questions</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>GET</th>
+                <td>Gets all questions in an assignment</td>
+                <td>assignment_num, course_num</td>
+            </tr>
+            <tr>
+                <th>POST</th>
+                <td>Adds a question to a lesson</td>
+                <td>number, assignment_num, course_num, question, question_type, options, answer</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <code>/questions/&lt;course_number&gt;/&lt;assignment_number&gt;/&lt;question_number&gt;</code>
+        <table class="table" style="width:600px">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>Action</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>PUT</th>
+                <td>Updates a question</td>
+                <td>question, question_type, options, answer</td>
+            </tr>
+            <tr>
+                <th>DELETE</th>
+                <td>Removes a question</td>
+                <td>None</td>
             </tr>
             </tbody>
         </table>
